@@ -4,13 +4,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: {
-    'js/app': ['./src/App.tsx'],
+    app: ['./src/App.tsx'],
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/,
+        test: /\.tsx?/,
         use: [
           'babel-loader',
           {
@@ -35,4 +39,9 @@ module.exports = {
     path: path.resolve(__dirname, 'dist/'),
     publicPath: '/',
   },
+  devServer: {
+    historyApiFallback: true,
+    host: "localhost",
+    port: 8089
+  }
 };
